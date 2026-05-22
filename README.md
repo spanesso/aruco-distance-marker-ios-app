@@ -15,25 +15,6 @@ Stack: **Swift 6 · AVFoundation · OpenCV 4.10 · SwiftUI**
   </tr>
 </table>
 
----
-
-## Why iOS over Android
-
-The main reason is a single line of AVFoundation:
-
-```swift
-connection.isCameraIntrinsicMatrixDeliveryEnabled = true
-```
-
-iOS delivers the real, per-unit, factory-calibrated intrinsic matrix on every frame. Android has no equivalent — you either calibrate manually (chessboard, fifteen frames, `calibrateCamera`) or approximate from the declared FOV, which typically adds 5–15% of systematic error. That alone settles the platform question.
-
-The rest are secondary benefits:
-
-| Factor | iOS |
-|---|---|
-| Camera access | AVFoundation gives zero-copy `CVPixelBuffer` in BGRA32 — one memcpy-free path to `cv::Mat` |
-| Concurrency | Swift 6 actor isolation makes concurrent code correct by construction, not by discipline |
-| Toolchain | Profiler, debugger, and SwiftUI previews in one place |
 
 ---
 
